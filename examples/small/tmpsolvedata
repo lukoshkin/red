@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<ROOT TYPE="DATA" DESC="">
+	<EQUATIONS DESC="main processes" TYPE="DATA">
+		<SPECIFIC DESC="specific parameters" TYPE="DATA">
+			<VISCMOL DESC="molecular viscosity" TYPE="DOUBLE"> 1 </VISCMOL>
+			<RHO DESC="density" TYPE="DOUBLE"> 1 </RHO>
+			<GRAV DESC="gravitational acceleration" TYPE="DOUBLE"> 0 </GRAV>
+			<GPHI DESC="spherical angle" TYPE="DOUBLE"> 90 </GPHI>
+			<GOMEGA DESC="horizontal angle" TYPE="DOUBLE"> 90 </GOMEGA>
+			<IRHO8 DESC="reference density type" TYPE="COMBOX"> 1 
+        <ITEM TYPE="STRING"> set </ITEM>
+				<ITEM TYPE="STRING"> volume averaged </ITEM>
+			</IRHO8>
+			<RHO8 DESC="reference density" TYPE="DOUBLE"> 1 </RHO8>
+			<PRESS DESC="reference pressure [Pa]" TYPE="DOUBLE"> 0 </PRESS>
+			<BPS DESC="static pressure" TYPE="BOOL"> 0 </BPS>
+			<REFCELL DESC="reference cell [m]" TYPE="STRING">0.0001;0.0001;0.0001</REFCELL>
+			<UREF DESC="reference velocity [m/s]" TYPE="DOUBLE"> 0 </UREF>
+			<LREF DESC="reference length scale [m]" TYPE="DOUBLE"> 0 </LREF>
+			<SPNONNEW DESC="non-Newtonian fluids" TYPE="DATA">
+				<AL DESC="viscosity relaxation factor" TYPE="DOUBLE"> 1 </AL>
+				<GAMMA DESC="regularization parameter" TYPE="DOUBLE"> 1000 </GAMMA>
+				<GAMMAREF DESC="characteristic shear rate (1/s)" TYPE="DOUBLE"> 1 </GAMMAREF>
+				<MUMAX DESC="maximum visocity (Pa*s)" TYPE="DOUBLE"> 100000 </MUMAX>
+				<WALLMODEL DESC="wall model" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> dUdn </ITEM>
+					<ITEM TYPE="STRING"> twall </ITEM>
+				</WALLMODEL>
+			</SPNONNEW>
+			<FLUIDS DESC="fluids properties" TYPE="LIST" count="2">
+				<TEMPLATE DESC="COMPONENT" TYPE="BOOL"> 0 
+          <NAME DESC="fluid name" TYPE="STRING"> fluid </NAME>
+					<SOLID DESC="solid or fluid (yes or no)" TYPE="BOOL"> 0 </SOLID>
+					<IRTYPE DESC="Density assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> fluid </ITEM>
+						<ITEM TYPE="STRING"> gas </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> mixed </ITEM>
+					</IRTYPE>
+					<RHO DESC="reference density" TYPE="FLOAT"> 1 </RHO>
+					<MM DESC="molecular mass" TYPE="FLOAT"> 1 </MM>
+					<TVEXP DESC="thermal volumetric expansion coefficient" TYPE="FLOAT"> 0 </TVEXP>
+					<T0 DESC="reference temperature" TYPE="FLOAT"> 273.15 </T0>
+					<RHOTABLE DESC="Density table" TYPE="STRING"> .DAT </RHOTABLE>
+					<IVTYPE DESC="Viscosity assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> non-Newtonian </ITEM>
+					</IVTYPE>
+					<VISC DESC="reference viscosity" TYPE="FLOAT"> 1e-005 </VISC>
+					<VISCTABLE DESC="Viscosity table" TYPE="STRING"> .DAT </VISCTABLE>
+					<IDTYPE DESC="Diffusion assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Schmidt </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IDTYPE>
+					<DM DESC="diffusion coeffcient" TYPE="FLOAT"> 1e-005 </DM>
+					<SC DESC="Schmidt number" TYPE="FLOAT"> 1 </SC>
+					<SCT DESC="Turbulent Schmidt number" TYPE="FLOAT"> 0.9 </SCT>
+					<DMTABLE DESC="Diffusion table" TYPE="STRING"> .DAT </DMTABLE>
+					<IKTYPE DESC="Thermal conductivity assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Prandtl </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IKTYPE>
+					<KM DESC="Thermal conductivity [J/(sec*K*m)]" TYPE="FLOAT"> 1e-005 </KM>
+					<PR DESC="Prandtl number" TYPE="FLOAT"> 1 </PR>
+					<KMTABLE DESC="Thermal conductivity table" TYPE="STRING"> .DAT </KMTABLE>
+					<CPDATA DESC="Specific Heat Capacity" TYPE="DATA">
+						<CP0 DESC="coefficient 0" TYPE="DOUBLE"> 0 </CP0>
+						<CP1 DESC="coefficient 1" TYPE="DOUBLE"> 0 </CP1>
+						<CP2 DESC="coefficient 2" TYPE="DOUBLE"> 0 </CP2>
+						<CP3 DESC="coefficient 3" TYPE="DOUBLE"> 0 </CP3>
+						<CP4 DESC="coefficient 4" TYPE="DOUBLE"> 0 </CP4>
+						<CP5 DESC="coefficient 5" TYPE="DOUBLE"> 0 </CP5>
+					</CPDATA>
+				</TEMPLATE>
+				<ITEM DESC="COMPONENT" TYPE="BOOL"> 1 
+          <NAME DESC="fluid name" TYPE="STRING"> A </NAME>
+					<SOLID DESC="solid or fluid (yes or no)" TYPE="BOOL"> 0 </SOLID>
+					<IRTYPE DESC="Density assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> fluid </ITEM>
+						<ITEM TYPE="STRING"> gas </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> mixed </ITEM>
+					</IRTYPE>
+					<RHO DESC="reference density" TYPE="FLOAT"> 1 </RHO>
+					<MM DESC="molecular mass" TYPE="FLOAT"> 28 </MM>
+					<TVEXP DESC="thermal volumetric expansion coefficient" TYPE="FLOAT"> 0 </TVEXP>
+					<T0 DESC="reference temperature" TYPE="FLOAT"> 0 </T0>
+					<RHOTABLE DESC="Density table" TYPE="STRING"/>
+					<IVTYPE DESC="Viscosity assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> non-Newtonian </ITEM>
+					</IVTYPE>
+					<VISC DESC="reference viscosity" TYPE="FLOAT"> 0.2 </VISC>
+					<VISCTABLE DESC="Viscosity table" TYPE="STRING"/>
+					<IDTYPE DESC="Diffusion assignment" TYPE="COMBOX">0<ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Schmidt </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IDTYPE>
+					<DM DESC="diffusion coeffcient" TYPE="FLOAT"> 0 </DM>
+					<SC DESC="Schmidt number" TYPE="FLOAT"> 1e+030 </SC>
+					<SCT DESC="Turbulent Schmidt number" TYPE="FLOAT"> 1e+030 </SCT>
+					<DMTABLE DESC="Diffusion table" TYPE="STRING"/>
+					<IKTYPE DESC="Thermal conductivity assignment" TYPE="COMBOX"> 1 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Prandtl </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IKTYPE>
+					<KM DESC="Thermal conductivity [J/(sec*K*m)]" TYPE="FLOAT"> 0 </KM>
+					<PR DESC="Prandtl number" TYPE="FLOAT"> 0.71 </PR>
+					<KMTABLE DESC="Thermal conductivity table" TYPE="STRING"/>
+					<CPDATA DESC="Specific Heat Capacity" TYPE="DATA">
+						<CP0 DESC="coefficient 0" TYPE="DOUBLE"> 0 </CP0>
+						<CP1 DESC="coefficient 1" TYPE="DOUBLE"> 1000 </CP1>
+						<CP2 DESC="coefficient 2" TYPE="DOUBLE"> 0 </CP2>
+						<CP3 DESC="coefficient 3" TYPE="DOUBLE"> 0 </CP3>
+						<CP4 DESC="coefficient 4" TYPE="DOUBLE"> 0 </CP4>
+						<CP5 DESC="coefficient 5" TYPE="DOUBLE"> 0 </CP5>
+					</CPDATA>
+				</ITEM>
+				<ITEM DESC="COMPONENT" TYPE="BOOL"> 1 
+          <NAME DESC="fluid name" TYPE="STRING"> B </NAME>
+					<SOLID DESC="solid or fluid (yes or no)" TYPE="BOOL"> 0 </SOLID>
+					<IRTYPE DESC="Density assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> fluid </ITEM>
+						<ITEM TYPE="STRING"> gas </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> mixed </ITEM>
+					</IRTYPE>
+					<RHO DESC="reference density" TYPE="FLOAT"> 1 </RHO>
+					<MM DESC="molecular mass" TYPE="FLOAT"> 28 </MM>
+					<TVEXP DESC="thermal volumetric expansion coefficient" TYPE="FLOAT"> 0 </TVEXP>
+					<T0 DESC="reference temperature" TYPE="FLOAT"> 0 </T0>
+					<RHOTABLE DESC="Density table" TYPE="STRING"/>
+					<IVTYPE DESC="Viscosity assignment" TYPE="COMBOX"> 0 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+						<ITEM TYPE="STRING"> non-Newtonian </ITEM>
+					</IVTYPE>
+					<VISC DESC="reference viscosity" TYPE="FLOAT"> 2 </VISC>
+					<VISCTABLE DESC="Viscosity table" TYPE="STRING"/>
+					<IDTYPE DESC="Diffusion assignment" TYPE="COMBOX">0<ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Schmidt </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IDTYPE>
+					<DM DESC="diffusion coeffcient" TYPE="FLOAT"> 0 </DM>
+					<SC DESC="Schmidt number" TYPE="FLOAT"> 1e+030 </SC>
+					<SCT DESC="Turbulent Schmidt number" TYPE="FLOAT"> 1e+030 </SCT>
+					<DMTABLE DESC="Diffusion table" TYPE="STRING"/>
+					<IKTYPE DESC="Thermal conductivity assignment" TYPE="COMBOX"> 1 
+            <ITEM TYPE="STRING"> constant </ITEM>
+						<ITEM TYPE="STRING"> by Prandtl </ITEM>
+						<ITEM TYPE="STRING"> table </ITEM>
+					</IKTYPE>
+					<KM DESC="Thermal conductivity [J/(sec*K*m)]" TYPE="FLOAT"> 0 </KM>
+					<PR DESC="Prandtl number" TYPE="FLOAT"> 0.71 </PR>
+					<KMTABLE DESC="Thermal conductivity table" TYPE="STRING"/>
+					<CPDATA DESC="Specific Heat Capacity" TYPE="DATA">
+						<CP0 DESC="coefficient 0" TYPE="DOUBLE"> 0 </CP0>
+						<CP1 DESC="coefficient 1" TYPE="DOUBLE"> 1000 </CP1>
+						<CP2 DESC="coefficient 2" TYPE="DOUBLE"> 0 </CP2>
+						<CP3 DESC="coefficient 3" TYPE="DOUBLE"> 0 </CP3>
+						<CP4 DESC="coefficient 4" TYPE="DOUBLE"> 0 </CP4>
+						<CP5 DESC="coefficient 5" TYPE="DOUBLE"> 0 </CP5>
+					</CPDATA>
+				</ITEM>
+			</FLUIDS>
+			<STREAMS DESC="fluids streams" TYPE="LIST" count="2">
+				<TEMPLATE DESC="STREAM" TYPE="DATA">
+					<G DESC="mass flow rate [n. m^3/hr]" TYPE="FLOAT"> 1000 </G>
+					<TEMP DESC="temperature" TYPE="FLOAT"> 0 </TEMP>
+					<SPECIES DESC="species fractions" TYPE="LIST" count="0">
+						<TEMPLATE DESC="COMPONENT" TYPE="STRING">
+							<ISP DESC="component index" TYPE="LONG"> 0 </ISP>
+							<FRAC DESC="component portion" TYPE="FLOAT"> 0 </FRAC>
+						</TEMPLATE>
+					</SPECIES>
+				</TEMPLATE>
+				<ITEM DESC="STREAM" TYPE="DATA">
+					<G DESC="mass flow rate [n. m^3/hr]" TYPE="FLOAT"> 0 </G>
+					<TEMP DESC="temperature" TYPE="FLOAT"> 283 </TEMP>
+					<SPECIES DESC="species fractions" TYPE="LIST" count="1">
+						<TEMPLATE DESC="COMPONENT" TYPE="STRING">
+							<ISP DESC="component index" TYPE="LONG"> 0 </ISP>
+							<FRAC DESC="component portion" TYPE="FLOAT"> 0 </FRAC>
+						</TEMPLATE>
+						<ITEM DESC="COMPONENT" TYPE="STRING">
+							<ISP DESC="component index" TYPE="LONG"> 1 </ISP>
+							<FRAC DESC="component portion" TYPE="FLOAT"> 1 </FRAC>
+						</ITEM>
+					</SPECIES>
+				</ITEM>
+				<ITEM DESC="STREAM" TYPE="DATA">
+					<G DESC="mass flow rate [n. m^3/hr]" TYPE="FLOAT"> 0 </G>
+					<TEMP DESC="temperature" TYPE="FLOAT"> 283 </TEMP>
+					<SPECIES DESC="species fractions" TYPE="LIST" count="1">
+						<TEMPLATE DESC="COMPONENT" TYPE="STRING">
+							<ISP DESC="component index" TYPE="LONG"> 0 </ISP>
+							<FRAC DESC="component portion" TYPE="FLOAT"> 0 </FRAC>
+						</TEMPLATE>
+						<ITEM DESC="COMPONENT" TYPE="STRING">
+							<ISP DESC="component index" TYPE="LONG"> 2 </ISP>
+							<FRAC DESC="component portion" TYPE="FLOAT"> 1 </FRAC>
+						</ITEM>
+					</SPECIES>
+				</ITEM>
+			</STREAMS>
+			<INITSTREAMS DESC="initial distributions" TYPE="LIST" count="0">
+				<TEMPLATE TYPE="DATA">
+					<ISTR DESC="stream" TYPE="LONG"> 0 </ISTR>
+					<IDOMAIN DESC="domain" TYPE="LONG"> 0 </IDOMAIN>
+				</TEMPLATE>
+			</INITSTREAMS>
+			<INIDISTRS DESC="initial distributions" TYPE="LIST" count="0">
+				<TEMPLATE TYPE="DATA" DESC="">
+					<ISTR DESC="stream" TYPE="LONG"> 0 </ISTR>
+					<BOXMIN DESC="box minimum [m]" TYPE="STRING"> 0,0,0 </BOXMIN>
+					<BOXMAX DESC="box maximum [m]" TYPE="STRING"> 0,0,0 </BOXMAX>
+					<IWHEN DESC="when" TYPE="LONG"> 0 </IWHEN>
+				</TEMPLATE>
+				<ITEM TYPE="DATA" DESC=""><ISTR DESC="stream" TYPE="LONG">1</ISTR>
+					<BOXMIN DESC="box minimum [m]" TYPE="STRING"> -100,-100,-100 </BOXMIN>
+					<BOXMAX DESC="box maximum [m]" TYPE="STRING">0,0,0</BOXMAX>
+					<IWHEN DESC="when" TYPE="LONG"> 0 </IWHEN>
+				</ITEM>
+			</INIDISTRS>
+			<PRIMARYSTREAM DESC="primary stream" TYPE="LONG"> 2 </PRIMARYSTREAM>
+			<TEMDEF DESC="temperature calculation" TYPE="DATA">
+				<ISTEP DESC="maximum iteration" TYPE="LONG"> 100 </ISTEP>
+				<TOL DESC="relative tolerance" TYPE="DOUBLE"> 1e-006 </TOL>
+				<MIN DESC="minimum" TYPE="DOUBLE"> 0 </MIN>
+				<MAX DESC="maximum" TYPE="DOUBLE"> 3000 </MAX>
+			</TEMDEF>
+		</SPECIFIC>
+		<VELOCITY DESC="velocity" TYPE="BOOL"> 1 
+      <SCHEME DESC="approximation scheme" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> UDS </ITEM>
+				<ITEM TYPE="STRING"> QUICK </ITEM>
+				<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+				<ITEM TYPE="STRING"> Superbee </ITEM>
+				<ITEM TYPE="STRING"> CDS </ITEM>
+				<ITEM TYPE="STRING"> HOCDS </ITEM>
+				<ITEM TYPE="STRING"> CUBISTA </ITEM>
+				<ITEM TYPE="STRING"> Osher2 </ITEM>
+				<ITEM TYPE="STRING"> linear </ITEM>
+			</SCHEME>
+			<SOLVER DESC="solver type" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</SOLVER>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE">0.8</AL>
+			<NITER DESC="iteration count" TYPE="LONG"> 20 </NITER>
+			<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<CORRVEL DESC="velocity correction on OUTPUT" TYPE="COMBOX"> 1 
+        <ITEM TYPE="STRING"> OFF </ITEM>
+				<ITEM TYPE="STRING"> ON </ITEM>
+				<ITEM TYPE="STRING"> FIX </ITEM>
+			</CORRVEL>
+			<CORRG DESC="velocity correction on INPUT" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> OFF </ITEM>
+				<ITEM TYPE="STRING"> ALL </ITEM>
+				<ITEM TYPE="STRING"> NORMAL </ITEM>
+			</CORRG>
+			<UN DESC="unsteady options" TYPE="DATA">
+				<SCHEME DESC="scheme type" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> 1st-order </ITEM>
+					<ITEM TYPE="STRING"> 2nd-order </ITEM>
+					<ITEM TYPE="STRING"> Crank–Nicolson </ITEM>
+				</SCHEME>
+				<SIGMA DESC="Crank–Nicolson coefficient" TYPE="DOUBLE"> 0.5 </SIGMA>
+			</UN>
+			<INISTR DESC="U [m/s]" TYPE="STRING"> 0.0;0.0;0.0 </INISTR>
+			<GRADCORR DESC="correct gradients by wall-law" TYPE="BOOL"> 0 </GRADCORR>
+			<GRADP DESC="grad(P)" TYPE="COMBOX"> 3 
+        <ITEM TYPE="STRING"> set </ITEM>
+				<ITEM TYPE="STRING"> Gauss </ITEM>
+				<ITEM TYPE="STRING"> Gauss 2nd </ITEM>
+				<ITEM TYPE="STRING"> weighted </ITEM>
+			</GRADP>
+			<SCHEMELIMITED DESC="limited convective scheme" TYPE="BOOL"> 0 </SCHEMELIMITED>
+			<NONORTH DESC="non-orthogonal factor for div(T)" TYPE="DOUBLE"> 0 </NONORTH>
+			<HOGRAD DESC="hi-order gradient" TYPE="BOOL"> 0 </HOGRAD>
+		</VELOCITY>
+		<PRESSURE DESC="pressure calculation" TYPE="BOOL"> 1 
+      <SOLVER DESC="solver type" TYPE="COMBOX"> 5 
+        <ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</SOLVER>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE"> 1 </AL>
+			<NITER DESC="iteration count" TYPE="LONG"> 50 </NITER>
+			<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<NOLN DESC="nonlinear iteration count" TYPE="LONG"> 1 </NOLN>
+			<NOLTOL DESC="nonlinear iteration tolerance" TYPE="DOUBLE"> 1e-006 </NOLTOL>
+			<CRCH DESC="Rhie-Chow coefficient" TYPE="DOUBLE"> 1 </CRCH>
+			<CRCHTIME DESC="Rhie-Chow coefficient for unsteady term" TYPE="DOUBLE"> 0 </CRCHTIME>
+			<SIMPLEALF DESC="tau-coefficient" TYPE="DOUBLE"> 0.8 </SIMPLEALF>
+			<SIMPLEDT DESC="steady dt" TYPE="DOUBLE"> 0 </SIMPLEDT>
+			<PRESOLVER DESC="preliminary solver" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</PRESOLVER>
+			<PREITER DESC="preliminary iteration count" TYPE="LONG"> 10 </PREITER>
+			<PREALF DESC="preliminary relaxation factor" TYPE="DOUBLE"> 1 </PREALF>
+			<BCIN DESC="inlet value extrapolation" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> dp/dn=0 </ITEM>
+				<ITEM TYPE="STRING"> d2p/dn2=0 </ITEM>
+				<ITEM TYPE="STRING"> dp/dn=const </ITEM>
+			</BCIN>
+			<BCOUT DESC="outlet value extrapolation" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> dp/dn=0 </ITEM>
+				<ITEM TYPE="STRING"> d2p/dn2=0 </ITEM>
+				<ITEM TYPE="STRING"> dp/dn=const </ITEM>
+			</BCOUT>
+			<BCWALL DESC="wall value extrapolation" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> dp/dn=0 </ITEM>
+				<ITEM TYPE="STRING"> d2p/dn2=0 </ITEM>
+				<ITEM TYPE="STRING"> dp/dn=const </ITEM>
+			</BCWALL>
+			<HOGRAD DESC="hi-order gradient" TYPE="BOOL"> 0 </HOGRAD>
+			<BRES DESC="correct residuals" TYPE="BOOL"> 0 </BRES>
+			<BMORV DESC="mass or volume" TYPE="BOOL"> 0 </BMORV>
+			<ZVOL DESC="define zero pressure" TYPE="BOOL"> 0 </ZVOL>
+		</PRESSURE>
+		<SPECIESTRANS DESC="species transport" TYPE="BOOL"> 1 
+      <SCHEME DESC="approximation scheme" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> UDS </ITEM>
+				<ITEM TYPE="STRING"> QUICK </ITEM>
+				<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+				<ITEM TYPE="STRING"> Superbee </ITEM>
+				<ITEM TYPE="STRING"> CDS </ITEM>
+				<ITEM TYPE="STRING"> HOCDS </ITEM>
+				<ITEM TYPE="STRING"> CUBISTA </ITEM>
+				<ITEM TYPE="STRING"> Osher2 </ITEM>
+				<ITEM TYPE="STRING"> linear </ITEM>
+			</SCHEME>
+			<SOLVER DESC="solver type" TYPE="COMBOX">0<ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</SOLVER>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE">-0.6</AL>
+			<NITER DESC="iteration count" TYPE="LONG"> 20 </NITER>
+			<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<NOLN DESC="nonlinear iteration count" TYPE="LONG"> 1 </NOLN>
+			<NOLTOL DESC="nonlinear iteration tolerance" TYPE="DOUBLE"> 0.0001 </NOLTOL>
+			<BDIV DESC="divergence form" TYPE="BOOL"> 1 </BDIV>
+			<BDCOR DESC="zero-additive for div-form" TYPE="BOOL">0</BDCOR>
+			<BNITA DESC="non-iterative scheme" TYPE="BOOL"> 0 </BNITA>
+			<DTRELAX DESC="relaxation dt [s]" TYPE="DOUBLE">0</DTRELAX>
+			<UN DESC="unsteady options" TYPE="DATA">
+				<SCHEME DESC="scheme type" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> 1st-order </ITEM>
+					<ITEM TYPE="STRING"> 2nd-order </ITEM>
+					<ITEM TYPE="STRING"> Crank–Nicolson </ITEM>
+				</SCHEME>
+				<SIGMA DESC="Crank–Nicolson coefficient" TYPE="DOUBLE"> 0.5 </SIGMA>
+			</UN>
+			<SIGMAT DESC="turbulent Schmidt number" TYPE="DOUBLE"> 0.9 </SIGMAT>
+			<IPSC DESC="passive component" TYPE="LONG"> 2 </IPSC>
+			<BFRAC DESC="write fraction" TYPE="BOOL"> 0 </BFRAC>
+			<AMIN DESC="cut off concentration" TYPE="DOUBLE"> 1e-010 </AMIN>
+			<ALOUTFLUX DESC="outlet flux correction (0-1)" TYPE="DOUBLE"> 1 </ALOUTFLUX>
+			<CARTCMPR DESC="artificial compression coefficient" TYPE="DOUBLE">1</CARTCMPR>
+			<BCMPR DESC="pseudo-compression" TYPE="BOOL"> 0 </BCMPR>
+			<CMAX DESC="pseudo-compression maximum (0.6)" TYPE="DOUBLE"> 0.9 </CMAX>
+			<CMIN DESC="pseudo-compression minimum (0.4)" TYPE="DOUBLE"> 0.1 </CMIN>
+			<CSCHEME DESC="compression scheme" TYPE="COMBOX">2<ITEM TYPE="STRING"> UDS </ITEM>
+				<ITEM TYPE="STRING"> QUICK </ITEM>
+				<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+				<ITEM TYPE="STRING"> Superbee </ITEM>
+				<ITEM TYPE="STRING"> CDS </ITEM>
+				<ITEM TYPE="STRING"> HOCDS </ITEM>
+				<ITEM TYPE="STRING"> CUBISTA </ITEM>
+				<ITEM TYPE="STRING"> Osher2 </ITEM>
+				<ITEM TYPE="STRING"> linear </ITEM>
+			</CSCHEME>
+			<STENSION DESC="surface tension" TYPE="BOOL"> 0 
+        <ISP DESC="indicator component" TYPE="LONG"> 1 </ISP>
+				<TENSION DESC="surface tension coefficient [N/m]" TYPE="DOUBLE"> 0 </TENSION>
+				<ANGLE DESC="contact angle [deg]" TYPE="DOUBLE"> 30 </ANGLE>
+				<MATH DESC="numerical algorithm" TYPE="DATA">
+					<BVOL DESC="volume or surface force" TYPE="BOOL"> 0 </BVOL>
+					<BKS DESC="smooth curvature" TYPE="BOOL"> 1 </BKS>
+					<CSK DESC="interface smoothing factor" TYPE="DOUBLE"> 0.5 </CSK>
+					<CPC DESC="steeping force factor" TYPE="DOUBLE"> 0.5 </CPC>
+					<ISMTH DESC="smoothing way" TYPE="LONG"> 1 </ISMTH>
+					<CWS DESC="wall normal smoothing" TYPE="DOUBLE"> 1 </CWS>
+					<CFILT DESC="parallel fluxes smoothing" TYPE="DOUBLE"> 0 </CFILT>
+					<CDT1 DESC="capillary dt factor" TYPE="DOUBLE"> 1 </CDT1>
+					<CDT2 DESC="viscous dt factor" TYPE="DOUBLE"> 1 </CDT2>
+					<CSP DESC="linearization factor" TYPE="DOUBLE"> -100 </CSP>
+					<AFC DESC="force relaxation" TYPE="DOUBLE"> 1 </AFC>
+					<WAYSP DESC="linearization method" TYPE="LONG"> 1 </WAYSP>
+					<MUEFF DESC="maximum viscosity ratio" TYPE="DOUBLE"> 200 </MUEFF>
+					<EQPC DESC="capillary pressure equation" TYPE="BOOL"> 1 
+            <SOLVER DESC="solver type" TYPE="COMBOX"> 2 
+              <ITEM TYPE="STRING"> DILU </ITEM>
+							<ITEM TYPE="STRING"> GS </ITEM>
+							<ITEM TYPE="STRING"> CRES </ITEM>
+							<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+							<ITEM TYPE="STRING"> CG </ITEM>
+							<ITEM TYPE="STRING"> amgcl </ITEM>
+						</SOLVER>
+						<AL DESC="relaxation parameter" TYPE="DOUBLE"> 1 </AL>
+						<NITER DESC="iteration count" TYPE="LONG"> 100 </NITER>
+						<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+						<CRHC DESC="Rhie-Chow correction factor" TYPE="DOUBLE"> 0 </CRHC>
+						<BRHS DESC="include pressure gradient" TYPE="BOOL"> 1 </BRHS>
+					</EQPC>
+				</MATH>
+			</STENSION>
+		</SPECIESTRANS>
+		<PSCALAR DESC="passive scalar" TYPE="BOOL"> 0 
+      <SCHEME DESC="approximation scheme" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> UDS </ITEM>
+				<ITEM TYPE="STRING"> QUICK </ITEM>
+				<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+				<ITEM TYPE="STRING"> Superbee </ITEM>
+				<ITEM TYPE="STRING"> CDS </ITEM>
+				<ITEM TYPE="STRING"> HOCDS </ITEM>
+				<ITEM TYPE="STRING"> CUBISTA </ITEM>
+				<ITEM TYPE="STRING"> Osher2 </ITEM>
+				<ITEM TYPE="STRING"> linear </ITEM>
+			</SCHEME>
+			<SOLVER DESC="solver type" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</SOLVER>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE"> 1 </AL>
+			<NITER DESC="iteration count" TYPE="LONG"> 20 </NITER>
+			<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<LIST DESC="boundaries" TYPE="LIST" count="0">
+				<TEMPLATE DESC="boundary" TYPE="STRING">
+					<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+					<VALUE DESC="value" TYPE="FLOAT"> 0 </VALUE>
+					<ALPHA DESC="alpha [kg/m^2/s]" TYPE="FLOAT"> 0 </ALPHA>
+					<TT DESC="additional flux [kg/m^2/s]" TYPE="FLOAT"> 0 </TT>
+				</TEMPLATE>
+			</LIST>
+			<SIGMAV DESC="molecular Schmidt number" TYPE="DOUBLE"> 1 </SIGMAV>
+			<SIGMAT DESC="turbulent Schmidt number" TYPE="DOUBLE"> 1 </SIGMAT>
+			<PRIMARYSTREAM DESC="initial stream" TYPE="LONG"> 1 </PRIMARYSTREAM>
+			<DEFAULTBC DESC="default bc index" TYPE="LONG"> 1 </DEFAULTBC>
+			<ISBOUNDED DESC="to limit value" TYPE="BOOL"> 0 </ISBOUNDED>
+			<ISVOLUME DESC="calculate volume integrals" TYPE="BOOL"> 0 </ISVOLUME>
+			<UN DESC="unsteady options" TYPE="DATA">
+				<SCHEME DESC="scheme type" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> 1st-order </ITEM>
+					<ITEM TYPE="STRING"> 2nd-order </ITEM>
+					<ITEM TYPE="STRING"> Crank–Nicolson </ITEM>
+				</SCHEME>
+				<SIGMA DESC="Crank–Nicolson coefficient" TYPE="DOUBLE"> 0.5 </SIGMA>
+			</UN>
+		</PSCALAR>
+		<POROSITY DESC="porous medium" TYPE="BOOL"> 1 
+      <UNIT DESC="permeability factor [darcy]" TYPE="DOUBLE"> 1 </UNIT>
+			<LENGTH DESC="length ratio [mkm]" TYPE="DOUBLE"> 500000 </LENGTH>
+			<ROCK DESC="rock permeability factor" TYPE="DOUBLE"> 1e-008 </ROCK>
+			<LIST DESC="porous domains" TYPE="LIST" count="0">
+				<TEMPLATE DESC="domain" TYPE="STRING">
+					<IDS DESC="source ID" TYPE="LONG"> 0 </IDS>
+					<IDD DESC="destination ID" TYPE="LONG"> 0 </IDD>
+					<FILTER DESC="filter [m]" TYPE="STRING"> 0.1;0.1;0.1 </FILTER>
+				</TEMPLATE>
+			</LIST>
+			<POROUS DESC="porous flow" TYPE="BOOL"> 1 
+        <MKR DESC="relative permeability model" TYPE="COMBOX">1<ITEM TYPE="STRING"> Brooks and Corey </ITEM>
+					<ITEM TYPE="STRING"> Van Genuchten </ITEM>
+				</MKR>
+				<MPC DESC="capillary pressure model" TYPE="COMBOX"> 1 
+          <ITEM TYPE="STRING"> Brooks and Corey </ITEM>
+					<ITEM TYPE="STRING"> Van Genuchten </ITEM>
+					<ITEM TYPE="STRING"> Linear </ITEM>
+				</MPC>
+				<KRA DESC="relative permeability A" TYPE="DOUBLE"> 1 </KRA>
+				<KRB DESC="relative permeability B" TYPE="DOUBLE"> 1 </KRB>
+				<KRM DESC="permeability power coefficient (VG)" TYPE="DOUBLE"> 0.5 </KRM>
+				<KRBC DESC="permeability power coefficient (BC)" TYPE="DOUBLE"> 3 </KRBC>
+				<AIRR DESC="irreducible saturation A" TYPE="DOUBLE">0.0001</AIRR>
+				<BIRR DESC="irreducible saturation B" TYPE="DOUBLE">0.0001</BIRR>
+				<AMIN DESC="minimum saturation" TYPE="DOUBLE">0.0001</AMIN>
+				<AMAX DESC="maximum saturation" TYPE="DOUBLE">0.9999</AMAX>
+				<PC0 DESC="entry capillary pressure" TYPE="DOUBLE"> 0 </PC0>
+				<PCMAX DESC="maximal capillary pressure" TYPE="DOUBLE"> 0 </PCMAX>
+				<BETTA DESC="pore size distribution parameter  (BC)" TYPE="DOUBLE"> 0.5 </BETTA>
+				<MM DESC="Van Genuchten coefficient" TYPE="DOUBLE"> 0.5 </MM>
+				<KPORE DESC="pore permeability" TYPE="DOUBLE">1000000</KPORE>
+				<EPS0 DESC="default porosity" TYPE="DOUBLE"> 1 </EPS0>
+				<EPSS DESC="solid porosity" TYPE="DOUBLE"> 0.001 </EPSS>
+				<AMIN DESC="cut off concentration" TYPE="DOUBLE">0.0001</AMIN>
+				<ISCHEME DESC="convective scheme for drift velocity" TYPE="COMBOX">2<ITEM TYPE="STRING"> UDS </ITEM>
+					<ITEM TYPE="STRING"> QUICK </ITEM>
+					<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+					<ITEM TYPE="STRING"> Superbee </ITEM>
+					<ITEM TYPE="STRING"> CDS </ITEM>
+					<ITEM TYPE="STRING"> HOCDS </ITEM>
+					<ITEM TYPE="STRING"> CUBISTA </ITEM>
+					<ITEM TYPE="STRING"> Osher2 </ITEM>
+					<ITEM TYPE="STRING"> linear </ITEM>
+				</ISCHEME>
+			</POROUS>
+		</POROSITY>
+	</EQUATIONS>
+	<MATH DESC="numerical algorithm" TYPE="DATA">
+		<MAXITER DESC="max. count of iter." TYPE="LONG"> 50000 </MAXITER>
+		<ERRSTOP DESC="tolerance" TYPE="DOUBLE"> 1e-020 </ERRSTOP>
+		<CHECKPOINT DESC="checkpoint" TYPE="LONG"> 200 </CHECKPOINT>
+		<RESNAMES DESC="residuals names" TYPE="STRING"> U;V;W;A </RESNAMES>
+		<DIVNAMES DESC="diverging residuals names" TYPE="STRING"/>
+		<DIVSTOP DESC="divergence" TYPE="DOUBLE"> 100 </DIVSTOP>
+		<FINI DESC="initial distribution" TYPE="BOOL"> 0 
+      <ININAME DESC="имя файла" TYPE="STRING"/>
+			<INIAVE DESC="загружать ave-файл" TYPE="BOOL"> 0 </INIAVE>
+			<TIMEAVE DESC="averaged time [s]" TYPE="DOUBLE"> 0 </TIMEAVE>
+		</FINI>
+		<AVE DESC="осреднение" TYPE="BOOL"> 0 
+      <START DESC="starting layer" TYPE="LONG"> 300 </START>
+			<TSTART DESC="starting time [s]" TYPE="DOUBLE"> -1 </TSTART>
+			<SKIP DESC="step" TYPE="LONG"> 1 </SKIP>
+			<TAB DESC="show plot tab" TYPE="BOOL"> 1 </TAB>
+			<SAVEDIS DESC="write f(average(A))" TYPE="BOOL"> 1 </SAVEDIS>
+		</AVE>
+		<PPROC DESC="postprocessing" TYPE="DATA">
+			<PRECISION DESC="precision" TYPE="LONG"> 12 </PRECISION>
+			<CONTINUE DESC="continue pproc-files" TYPE="BOOL">1</CONTINUE>
+			<CHECKOPER DESC="имена операций для контрольной точки" TYPE="STRING"> MLS</CHECKOPER>
+			<SRSOPER DESC="имена операций для серийной записи" TYPE="STRING"> L2 </SRSOPER>
+			<AVEOPER DESC="имена операций для осреднения" TYPE="STRING"> SHR </AVEOPER>
+			<TORGUE DESC="calculate viscous torque" TYPE="BOOL"> 0 </TORGUE>
+			<TORQUEP DESC="calculate pressure torque" TYPE="BOOL"> 0 </TORQUEP>
+			<TORRC DESC="use boundary center for torque" TYPE="BOOL"> 0 </TORRC>
+			<CHECKMESH DESC="check mesh" TYPE="BOOL"> 0 </CHECKMESH>
+			<MON DESC="monitoring cells" TYPE="DATA">
+				<NAMES DESC="fields names" TYPE="STRING"> U;V;W;P </NAMES>
+				<FILE DESC="coordinates file name" TYPE="STRING"> *.dat </FILE>
+				<DELTA DESC="maximal distance [m]" TYPE="DOUBLE"> 0.005 </DELTA>
+				<NMLS DESC="points count for NMLS" TYPE="LONG"> 100 </NMLS>
+				<MONCELL DESC="точки мониторинга" TYPE="LIST" count="2">
+					<TEMPLATE DESC="monitoring cell" TYPE="STRING">
+						<XC DESC="X-coordinate" TYPE="FLOAT"> 0 </XC>
+						<YC DESC="Y-coordinate" TYPE="FLOAT"> 0 </YC>
+						<ZC DESC="Z-coordinate" TYPE="FLOAT"> 0 </ZC>
+						<NAMES DESC="format" TYPE="STRING"> U;V;W </NAMES>
+					</TEMPLATE>
+					<ITEM DESC="monitoring cell" TYPE="STRING">
+						<XC DESC="X-coordinate" TYPE="FLOAT"> 0 </XC>
+						<YC DESC="Y-coordinate" TYPE="FLOAT"> 0 </YC>
+						<ZC DESC="Z-coordinate" TYPE="FLOAT"> -0.0173197 </ZC>
+						<NAMES DESC="format" TYPE="STRING"> A;PC </NAMES>
+					</ITEM>
+					<ITEM DESC="monitoring cell" TYPE="STRING">
+						<XC DESC="X-coordinate" TYPE="FLOAT"> 0 </XC>
+						<YC DESC="Y-coordinate" TYPE="FLOAT"> 0 </YC>
+						<ZC DESC="Z-coordinate" TYPE="FLOAT"> 2.27694 </ZC>
+						<NAMES DESC="format" TYPE="STRING"> A;PC </NAMES>
+					</ITEM>
+				</MONCELL>
+			</MON>
+			<SURFACEDATA DESC="surface distributions" TYPE="DATA">
+				<LOAD DESC="read surface distributions" TYPE="LIST" count="0">
+					<TEMPLATE DESC="surface distributions" TYPE="STRING">
+						<FILENAME DESC="file name" TYPE="STRING"/>
+						<NAMES DESC="fields names" TYPE="STRING"> U;V;W </NAMES>
+					</TEMPLATE>
+				</LOAD>
+				<WRITE DESC="write surface distributions" TYPE="LIST" count="0">
+					<TEMPLATE DESC="surface distributions" TYPE="STRING">
+						<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+						<NAMES DESC="fields names" TYPE="STRING"> U;V;W </NAMES>
+					</TEMPLATE>
+				</WRITE>
+			</SURFACEDATA>
+			<CELLS DESC="cells data" TYPE="DATA">
+				<WRITE DESC="write file" TYPE="BOOL"> 0 </WRITE>
+				<WNAMES DESC="fields names for writing" TYPE="STRING"> U;V;W;P </WNAMES>
+				<RFILE DESC="file name" TYPE="STRING"> none </RFILE>
+				<RNAMES DESC="fields names for reading" TYPE="STRING"> none </RNAMES>
+			</CELLS>
+		</PPROC>
+		<SOLVER DESC="linear system solver" TYPE="DATA">
+			<GSFAC DESC="GS factor" TYPE="DOUBLE"> 1.2 </GSFAC>
+			<PRE DESC="preconditioner" TYPE="COMBOX"> 1 
+        <ITEM TYPE="STRING"> J </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> DILU </ITEM>
+			</PRE>
+			<NITER DESC="preconditioner iteration" TYPE="LONG"> 1 </NITER>
+			<TOL DESC="preconditioner tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<TOL2 DESC="second tolerance" TYPE="DOUBLE"> 1e-006 </TOL2>
+			<RCI DESC="reference cell method" TYPE="LONG"> 0 </RCI>
+			<RCF DESC="reference cell factor" TYPE="DOUBLE"> 1 </RCF>
+			<AMGCL DESC="amgcl solver" TYPE="DATA">
+				<INTERP DESC="coarsening" TYPE="COMBOX"> 2 
+          <ITEM TYPE="STRING"> classic </ITEM>
+					<ITEM TYPE="STRING"> aggregation </ITEM>
+					<ITEM TYPE="STRING"> smoothed </ITEM>
+					<ITEM TYPE="STRING"> smoothed_emin </ITEM>
+				</INTERP>
+				<RELAX DESC="relaxation" TYPE="COMBOX"> 3 
+          <ITEM TYPE="STRING"> gauss-seidel </ITEM>
+					<ITEM TYPE="STRING"> ilu0 </ITEM>
+					<ITEM TYPE="STRING"> jacobi </ITEM>
+					<ITEM TYPE="STRING"> spai0 </ITEM>
+					<ITEM TYPE="STRING"> spai1 </ITEM>
+					<ITEM TYPE="STRING"> chebyshev </ITEM>
+				</RELAX>
+				<SOLVER DESC="iterative solvers" TYPE="COMBOX"> 1 
+          <ITEM TYPE="STRING"> cg </ITEM>
+					<ITEM TYPE="STRING"> bicgstab </ITEM>
+					<ITEM TYPE="STRING"> bicgstab(L) </ITEM>
+					<ITEM TYPE="STRING"> gmres </ITEM>
+				</SOLVER>
+				<COARSE DESC="coarse enough" TYPE="LONG"> 300 </COARSE>
+				<NPRE DESC="npre" TYPE="LONG"> 1 </NPRE>
+				<NPOST DESC="npost" TYPE="LONG"> 1 </NPOST>
+				<NCYCLE DESC="ncycle" TYPE="LONG"> 1 </NCYCLE>
+				<KCYCLE DESC="kcycle" TYPE="LONG"> 0 </KCYCLE>
+				<KCYCLEITER DESC="kcycle iterations" TYPE="LONG"> 1 </KCYCLEITER>
+				<UPDATEAMG DESC="update amg" TYPE="LONG"> 1 </UPDATEAMG>
+			</AMGCL>
+		</SOLVER>
+		<APPROX DESC="approximation details" TYPE="DATA">
+			<LSM DESC="least square method weight" TYPE="COMBOX"> 4 
+        <ITEM TYPE="STRING"> 0 </ITEM>
+				<ITEM TYPE="STRING"> 1/d^2 </ITEM>
+				<ITEM TYPE="STRING"> S/d^2 </ITEM>
+				<ITEM TYPE="STRING"> w*S/d^2 </ITEM>
+				<ITEM TYPE="STRING"> S/(J*d) </ITEM>
+			</LSM>
+			<ALFSIMM DESC="relaxation parameter SIMM" TYPE="DOUBLE">0.5</ALFSIMM>
+			<ALFOUT DESC="relaxation parameter OUT" TYPE="DOUBLE"> 1 </ALFOUT>
+			<ALFWALL DESC="relaxation parameter WALL" TYPE="DOUBLE"> 1 </ALFWALL>
+			<FACNONORTH DESC="nonorthogonal terms factor (bv)" TYPE="DOUBLE"> 0 </FACNONORTH>
+			<APPNONORTH DESC="nonorthogonal approximation terms factor (bc)" TYPE="DOUBLE"> 1 </APPNONORTH>
+			<HOCDS DESC="ho-cds factor (0, 1)" TYPE="DOUBLE"> 0 </HOCDS>
+			<HOGRAD DESC="ho gradient factor (0, 1)" TYPE="DOUBLE"> 0 </HOGRAD>
+			<HOGRADBC DESC="ho gradient factor bc (0, 1)" TYPE="DOUBLE"> 0 </HOGRADBC>
+			<SCHEMELIM DESC="limited convective scheme" TYPE="BOOL"> 0 </SCHEMELIM>
+			<DIVFORM DESC="divergence form" TYPE="BOOL"> 1 </DIVFORM>
+			<USEFLUX DESC="use corrected mass flux" TYPE="BOOL"> 1 </USEFLUX>
+			<FACMETHOD DESC="interpolation factor" TYPE="LONG"> 1 </FACMETHOD>
+			<RHOSCHEME DESC="density interpolation scheme" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> UDS </ITEM>
+				<ITEM TYPE="STRING"> QUICK </ITEM>
+				<ITEM TYPE="STRING"> UMIST TVD </ITEM>
+				<ITEM TYPE="STRING"> Superbee </ITEM>
+				<ITEM TYPE="STRING"> CDS </ITEM>
+				<ITEM TYPE="STRING"> HOCDS </ITEM>
+				<ITEM TYPE="STRING"> CUBISTA </ITEM>
+				<ITEM TYPE="STRING"> Osher2 </ITEM>
+				<ITEM TYPE="STRING"> linear </ITEM>
+			</RHOSCHEME>
+			<RHOUN DESC="unsteady term approximation" TYPE="COMBOX"> 0 
+        <ITEM TYPE="STRING"> 1st-order </ITEM>
+				<ITEM TYPE="STRING"> 2nd-order </ITEM>
+				<ITEM TYPE="STRING"> none </ITEM>
+			</RHOUN>
+			<CFLRHS DESC="local CFL number C1" TYPE="DOUBLE"> 1 </CFLRHS>
+			<CFLFAC DESC="local time-step-factor C2" TYPE="DOUBLE"> 1 </CFLFAC>
+			<BSP DESC="additional diagonal term to tau" TYPE="BOOL"> 1 </BSP>
+			<BWS DESC="weighted SIMPLE" TYPE="BOOL"> 1 </BWS>
+			<NPISO DESC="PISO steps" TYPE="LONG"> 1 </NPISO>
+			<FZERO DESC="zero matrice factor" TYPE="DOUBLE"> 1 </FZERO>
+		</APPROX>
+		<PERTURB DESC="volume perturbation" TYPE="DATA">
+			<VALUE DESC="value" TYPE="DOUBLE"> 0 </VALUE>
+			<START DESC="start" TYPE="LONG"> -1 </START>
+			<FINISH DESC="finish" TYPE="LONG"> -1 </FINISH>
+		</PERTURB>
+		<WALLDST DESC="wall distance calculation" TYPE="DATA">
+			<SOLVER DESC="solver type" TYPE="COMBOX"> 2 
+        <ITEM TYPE="STRING"> DILU </ITEM>
+				<ITEM TYPE="STRING"> GS </ITEM>
+				<ITEM TYPE="STRING"> CRES </ITEM>
+				<ITEM TYPE="STRING"> BiCGSTAB </ITEM>
+				<ITEM TYPE="STRING"> CG </ITEM>
+				<ITEM TYPE="STRING"> amgcl </ITEM>
+			</SOLVER>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE"> 1 </AL>
+			<NITER DESC="iteration count" TYPE="LONG"> 100 </NITER>
+			<TOL DESC="tolerance" TYPE="DOUBLE"> 0.01 </TOL>
+			<NOLN DESC="nonlinear iteration count" TYPE="LONG"> 200 </NOLN>
+			<NOLTOL DESC="nonlinear iteration tolerance" TYPE="DOUBLE"> 0.001 </NOLTOL>
+			<UPDATE DESC="update anyway" TYPE="BOOL"> 0 </UPDATE>
+			<RUN DESC="calculate" TYPE="BOOL"> 1 </RUN>
+		</WALLDST>
+	</MATH>
+	<BC DESC="boundary conditions" TYPE="DATA">
+		<RESETBC DESC="reset BC after reading file" TYPE="BOOL"> 1 </RESETBC>
+		<WINDOWS DESC="фиксированные входы" TYPE="LIST" count="1">
+			<TEMPLATE DESC="INPUT" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+				<ISTR DESC="stream number" TYPE="LONG"> 1 </ISTR>
+				<SIDE DESC="side number" TYPE="LONG"> 1 </SIDE>
+				<IRATE DESC="velocity assignment" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> stream portion </ITEM>
+					<ITEM TYPE="STRING"> velocity </ITEM>
+					<ITEM TYPE="STRING"> mass rate [kg/s] </ITEM>
+				</IRATE>
+				<FRAC DESC="velocity value" TYPE="FLOAT"> 1 </FRAC>
+				<ALPHA DESC="A-angle" TYPE="FLOAT"> 0 </ALPHA>
+				<BETTA DESC="B-angle" TYPE="FLOAT"> 0 </BETTA>
+				<GAMMA DESC="G-angle" TYPE="FLOAT"> 0 </GAMMA>
+				<SWIRL DESC="swirl" TYPE="FLOAT"> 0 </SWIRL>
+				<R DESC="radius" TYPE="FLOAT"> 0 </R>
+				<SCALE DESC="scale" TYPE="FLOAT"> 0 </SCALE>
+				<ITURB DESC="turbulence intensity [u/U]" TYPE="FLOAT"> 0 </ITURB>
+				<XC DESC="x-center" TYPE="FLOAT"> 0 </XC>
+				<YC DESC="y-center" TYPE="FLOAT"> 0 </YC>
+				<ZC DESC="z-center" TYPE="FLOAT"> 0 </ZC>
+			</TEMPLATE>
+			<ITEM DESC="INPUT" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 1 </ID>
+				<ISTR DESC="stream number" TYPE="LONG"> 1 </ISTR>
+				<SIDE DESC="side number" TYPE="LONG"> 1 </SIDE>
+				<IRATE DESC="velocity assignment" TYPE="COMBOX"> 1 
+          <ITEM TYPE="STRING"> stream portion </ITEM>
+					<ITEM TYPE="STRING"> velocity </ITEM>
+					<ITEM TYPE="STRING"> mass rate [kg/s] </ITEM>
+				</IRATE>
+				<FRAC DESC="velocity value" TYPE="FLOAT"> 1 </FRAC>
+				<ALPHA DESC="A-angle" TYPE="FLOAT"> 0 </ALPHA>
+				<BETTA DESC="B-angle" TYPE="FLOAT"> 0 </BETTA>
+				<GAMMA DESC="G-angle" TYPE="FLOAT"> 0 </GAMMA>
+				<SWIRL DESC="swirl" TYPE="FLOAT"> 0 </SWIRL>
+				<R DESC="radius" TYPE="FLOAT"> 0 </R>
+				<SCALE DESC="scale" TYPE="FLOAT"> 0 </SCALE>
+				<ITURB DESC="turbulence intensity [u/U]" TYPE="FLOAT"> 0 </ITURB>
+				<XC DESC="x-center" TYPE="FLOAT"> 0 </XC>
+				<YC DESC="y-center" TYPE="FLOAT"> 0 </YC>
+				<ZC DESC="z-center" TYPE="FLOAT"> 0 </ZC>
+			</ITEM>
+		</WINDOWS>
+		<OUTPUTS DESC="выходы/входы" TYPE="LIST" count="1">
+			<TEMPLATE DESC="OUTPUT" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+				<STREAM DESC="stream number" TYPE="LONG"> 0 </STREAM>
+				<TYPE DESC="bc type" TYPE="COMBOX"> 0 
+          <ITEM TYPE="STRING"> outlet/mass rate [kg/s] </ITEM>
+					<ITEM TYPE="STRING"> prescribed pressure </ITEM>
+					<ITEM TYPE="STRING"> mixed </ITEM>
+					<ITEM TYPE="STRING"> outlet/volume rate [m3/s] </ITEM>
+				</TYPE>
+				<P DESC="boundary value" TYPE="FLOAT"> 0 </P>
+			</TEMPLATE>
+			<ITEM DESC="OUTPUT" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 2 </ID>
+				<STREAM DESC="stream number" TYPE="LONG"> 1 </STREAM>
+				<TYPE DESC="bc type" TYPE="COMBOX">0<ITEM TYPE="STRING"> outlet/mass rate [kg/s] </ITEM>
+					<ITEM TYPE="STRING"> prescribed pressure </ITEM>
+					<ITEM TYPE="STRING"> mixed </ITEM>
+					<ITEM TYPE="STRING"> outlet/volume rate [m3/s] </ITEM>
+				</TYPE>
+				<P DESC="boundary value" TYPE="FLOAT"> 0 </P>
+			</ITEM>
+		</OUTPUTS>
+		<SLIPZONES DESC="границы со скольжением" TYPE="LIST" count="4">
+			<TEMPLATE DESC="SLIP ZONE" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+				<LENGTH DESC="slip length [m]" TYPE="FLOAT"> -1 </LENGTH>
+			</TEMPLATE>
+			<ITEM DESC="SLIP ZONE" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 3 </ID>
+				<LENGTH DESC="slip length [m]" TYPE="FLOAT"> -1 </LENGTH>
+			</ITEM>
+			<ITEM DESC="SLIP ZONE" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 4 </ID>
+				<LENGTH DESC="slip length [m]" TYPE="FLOAT"> -1 </LENGTH>
+			</ITEM>
+			<ITEM DESC="SLIP ZONE" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 5 </ID>
+				<LENGTH DESC="slip length [m]" TYPE="FLOAT"> -1 </LENGTH>
+			</ITEM>
+			<ITEM DESC="SLIP ZONE" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 6 </ID>
+				<LENGTH DESC="slip length [m]" TYPE="FLOAT"> -1 </LENGTH>
+			</ITEM>
+		</SLIPZONES>
+		<SETV DESC="области постоянной скорости" TYPE="LIST" count="0">
+			<TEMPLATE DESC="velocity vector" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+				<FX DESC="x-component" TYPE="FLOAT"> 0 </FX>
+				<FY DESC="y-component" TYPE="FLOAT"> 0 </FY>
+				<FZ DESC="z-component" TYPE="FLOAT"> 0 </FZ>
+			</TEMPLATE>
+		</SETV>
+		<SWIRLZONES DESC="области с закруткой" TYPE="LIST" count="0">
+			<TEMPLATE DESC="velocity vector" TYPE="STRING">
+				<ID DESC="cells ID" TYPE="LONG"> 0 </ID>
+				<SWIRL DESC="angular velocity" TYPE="FLOAT"> 0 </SWIRL>
+				<VEL DESC="axial velocity" TYPE="FLOAT"> 0 </VEL>
+				<NX DESC="normal x-component" TYPE="FLOAT"> 0 </NX>
+				<NY DESC="normal y-component" TYPE="FLOAT"> 0 </NY>
+				<NZ DESC="normal z-component" TYPE="FLOAT"> 0 </NZ>
+				<XC DESC="x-center" TYPE="FLOAT"> 0 </XC>
+				<YC DESC="y-center" TYPE="FLOAT"> 0 </YC>
+				<ZC DESC="z-center" TYPE="FLOAT"> 0 </ZC>
+				<RAD DESC="vortex radius, [m]" TYPE="FLOAT"> 0 </RAD>
+				<U0 DESC="axial velocity at center" TYPE="FLOAT"> 0 </U0>
+				<TYPE DESC="vortex model" TYPE="LONG"> 0 </TYPE>
+			</TEMPLATE>
+		</SWIRLZONES>
+		<PERIOD DESC="priodical BC" TYPE="DATA">
+			<ANGLEOMEGA DESC="spherical angle" TYPE="DOUBLE"> 90 </ANGLEOMEGA>
+			<ANGLEPHI DESC="horizontal angle" TYPE="DOUBLE"> 0 </ANGLEPHI>
+			<AL DESC="relaxation parameter" TYPE="DOUBLE"> 1 </AL>
+			<STREAMWISE DESC="streamwise-periodic flow" TYPE="BOOL"> 0 
+        <ID DESC="periodical face ID" TYPE="LONG"> 1 </ID>
+				<IDS DESC="conjugated periodical face ID" TYPE="LONG"> 2 </IDS>
+				<MASSFLUX DESC="mass flow rate (kg/s)" TYPE="DOUBLE"> 3.1408 </MASSFLUX>
+				<FLOWDIRX DESC="flow direction, X" TYPE="DOUBLE"> 0 </FLOWDIRX>
+				<FLOWDIRY DESC="flow direction, Y" TYPE="DOUBLE"> 0 </FLOWDIRY>
+				<FLOWDIRZ DESC="flow direction, Z" TYPE="DOUBLE"> 1 </FLOWDIRZ>
+				<AL DESC="relaxation factor" TYPE="DOUBLE"> 1 </AL>
+				<PRESSGRAD DESC="pressure gradient (Ps/m)" TYPE="DOUBLE"> 0 </PRESSGRAD>
+			</STREAMWISE>
+		</PERIOD>
+		<BVCOPY DESC="copy boundary values" TYPE="BOOL"> 0 
+      <IDS DESC="source ID" TYPE="LONG"> 3 </IDS>
+			<IDD DESC="destination ID" TYPE="LONG"> 9 </IDD>
+			<FILTER DESC="filter [m]" TYPE="STRING"> 1e+030;0.001;0.001; </FILTER>
+			<IWAY DESC="filter function" TYPE="COMBOX"> 3 
+        <ITEM TYPE="STRING"> Gauss </ITEM>
+				<ITEM TYPE="STRING"> box </ITEM>
+				<ITEM TYPE="STRING"> invert </ITEM>
+				<ITEM TYPE="STRING"> nearest </ITEM>
+				<ITEM TYPE="STRING"> periodic </ITEM>
+				<ITEM TYPE="STRING"> nearest-cell </ITEM>
+			</IWAY>
+			<ALF DESC="relaxation factor" TYPE="DOUBLE"> 1 </ALF>
+			<ISKIP DESC="skip copy" TYPE="LONG"> 1 </ISKIP>
+			<BSP DESC="correct species flux" TYPE="LONG"> 0 </BSP>
+			<BLIST DESC="boundaries list" TYPE="LIST" count="0">
+				<TEMPLATE DESC="domain" TYPE="STRING">
+					<IDS DESC="source ID" TYPE="LONG"> 0 </IDS>
+					<IDD DESC="destination ID" TYPE="LONG"> 0 </IDD>
+					<FILTER DESC="filter [m]" TYPE="STRING"> 0.1;0.1;0.1 </FILTER>
+				</TEMPLATE>
+			</BLIST>
+		</BVCOPY>
+	</BC>
+	<MESH DESC="mesh" TYPE="DATA">
+		<REMESH DESC="recalculate mesh" TYPE="BOOL"> 0 </REMESH>
+		<STRSOLIDLIST DESC="solid subdomains" TYPE="STRING"> ; </STRSOLIDLIST>
+		<SIZEDIR DESC="mesh size factor" TYPE="STRING"> 1;1;1; </SIZEDIR>
+	</MESH>
+	<UNSTEADY DESC="нестационарность" TYPE="BOOL"> 1 
+    <STEP DESC="time step" TYPE="DOUBLE">1E-5</STEP>
+		<RANGE DESC="time range" TYPE="DOUBLE">4000000</RANGE>
+		<MONITORING DESC="save data" TYPE="LONG">0</MONITORING>
+		<CHECKPOINT DESC="save checkpoint" TYPE="LONG">100</CHECKPOINT>
+		<ITERMAX DESC="maximal iteration count" TYPE="LONG"> 10 </ITERMAX>
+		<ITERMIN DESC="minimal iteration count" TYPE="LONG"> 1 </ITERMIN>
+		<CFLLOC DESC="local CFL number C3" TYPE="DOUBLE"> 1 </CFLLOC>
+		<DTRHS DESC="RHS CFL C4" TYPE="DOUBLE"> 2 </DTRHS>
+		<SRSNAMES DESC="имена полей для серийной записи" TYPE="STRING"> VEL|P|A|PC </SRSNAMES>
+		<NRBC DESC="non-reflecting boundary condition" TYPE="BOOL"> 0 </NRBC>
+		<CFL DESC="convective CFL" TYPE="DOUBLE">0</CFL>
+		<DTMIN DESC="minimal time step" TYPE="DOUBLE">1E-9</DTMIN>
+		<DTSET DESC="specified time step" TYPE="DOUBLE">1E-5</DTSET>
+	</UNSTEADY>
+</ROOT>

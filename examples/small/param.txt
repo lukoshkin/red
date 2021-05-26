@@ -1,0 +1,61 @@
+InFile geom/Horgue2015.raw   // входной файл raw, по умолчанию raw.raw
+Nx 400
+Ny 160
+Nz 1 
+//размерность raw фала по i,j,k , если не задана  Nx=Ny=Nz=(размер raw)^(1/3)
+OutFile geom/gcube // имя выходных файлов .umesh и .out, умолчанию  gt
+NPart 1 // колличество частей выходных файлов, по умолчанию 1.
+NumSkel 0 // обозначение скелета в исходных данных
+NumPore 255 // обозначение поры в исходных данных
+Direction 0 +1 // направление течения 0 - X,  1 - Y, 2 - Z  ,по умолчанию 1.
+Wall 0 // номер субдомена для твердой части, если не задан или 0 то твердая часть не включается в сетку( содержание raw 0 - проточная область, 255 - твердая) 
+CheckFill 1 // поиск связанных областей по текущему направлению, отрабатывается eсли Wall<=0.  По умолчанию 0 - не искать.
+Layers 0  //Добавочные слои вдоль текущего направления(колличество) .По умолчанию 0.
+SizeX 1.0
+SizeY 0.4
+SizeZ 0.1 // размеры по осям обласи сетки. По умолчанию 1.
+
+runmetis 1
+umesh 1
+
+// flow parameters
+KUNIT 1.0 //permeability factor [darcy]
+LRATIO 1.0E+06 //length ratio, real length [mkm] / model length
+ROCK 1.0E-08 //solid permeability factor
+KAVE -1  // permeability : -1 = from raw file, 0 = averaged, > 0 user defined
+TABLE	1
+
+EU -1 // non-dimensional pressure
+RE -1
+CA 0
+ANGLE 30.0
+RHO 1.0 //density ratio
+MU 1.0 //viscosity ratio
+IBC 2 //side boundary condition user = 0, slip = 1, wall = 2
+
+VOXEL	2500  //L[mkm]/NSIZE
+NSIZE	400
+RHO1	1000
+RHO2	800
+MU1	0.001
+MU2	0.1
+TENSION	0.0
+UIN	1.0E-04
+FILL 0.0
+TBEGIN
+0	0.0	0.001 
+1	0.4053095551728	0.50 
+2	0.1013273887932	0.50 
+3	0.3039821663796	0.50 
+4	0.2026547775864	0.50 
+255	1.0E+10	1.0
+TEND
+
+// numerical algorithm
+TOL 1.0E-20 //tolerance
+TIME 2000.0
+DT 2.50 //time step [c], <= 0 - steady 250
+
+SAVE	200
+CHECK	100
+UNLINES	200

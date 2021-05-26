@@ -1,0 +1,5 @@
+*.zip
+!amgcl-master.zip
+
+project/*
+!examples/small
