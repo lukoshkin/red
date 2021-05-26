@@ -26,17 +26,19 @@ find_string $img $containers \
   && { echo container \"$img\" already exists; exit 1; }
 
 
+mkdir vimmed
+
 docker build --build-arg UID=`id -u` --build-arg GID=`id -g` --build-arg N_CORES=$ncores -t $img . \
-&& wget -O Vimmed.Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
-&& docker build --build-arg IMG_NAME=$img -t $img Vimmed.Dockerfile \
-&& rm -f Vimmed.Dockefile
+&& wget -O vimmed/Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
+&& docker build --build-arg IMG_NAME=$img -t $img vimmed/ \
+&& rm -f vimmed || :
 
 [[ $? -ne 0 ]] && { echo Problems with building the images; exit 1; }
-unzip PoreFlow*.zip -d project 2> /dev/null
+unzip -n PoreFlow*.zip -d project 2> /dev/null
 
 [[ -d project  && -d examples ]] \
   && docker run --name $img \
-    -v project:/home/red/project \
-    -v examples:/home/red/project/examples \
+    -v $PWD/project:/home/red/project \
+    -v $PWD/examples:/home/red/project/examples \
     -e TERM=xterm-256color -ti -d $img \
   && cp helpers/* project/examples/
