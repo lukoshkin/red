@@ -45,7 +45,7 @@ RUN export DEBIAN_FRONTEND=noninteractive \
     && apt-get -qq update \
     && apt-get install -yq \
       build-essential python3-dev libboost-all-dev \
-      neovim cmake wget git unzip \
+      libhdf5-dev metis neovim cmake wget git unzip \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ####
@@ -109,4 +109,3 @@ RUN unzip amgcl-master.zip \
     && rm amgcl-master.zip
 
 USER $USER
-#ENTRYPOINT ["/bin/bash"]
