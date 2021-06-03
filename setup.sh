@@ -3,14 +3,22 @@
 [[ "$@" = *=* ]] && { echo '= is invalid sign in arguments'; exit 1; }
 
 ncores=4
-if [[ $1 =~ -n ]]
-then
-  ncores=$2
-  shift 2
-fi
+examples="$PWD/examples"
+set -- $(getopt -o n:,e: --name "$0" -- "$@")
 
+
+while [[ $1 != '--' ]]
+do
+  case $1 in
+    -n) ncores=$2; shift 2 ;;
+    -e) examples=$2; shift 2 ;;
+    *) echo Invalid arg; exit 1 ;;
+  esac
+done
+shift
+
+[[ $# -gt 1 ]] && { echo More than one positional argument given!; exit 1; }
 [[ -n $1 ]] && img=$1 || img=red
-
 
 find_string () {
   local sel=$1
@@ -39,9 +47,9 @@ docker build --build-arg UID=`id -u` --build-arg GID=`id -g` --build-arg N_CORES
 unzip -n PoreFlow*.zip -d project 2> /dev/null \
   && chmod +x project/bin/poremesh
 
-[[ -d project  && -d examples ]] \
+[[ -d project  && -d $examples ]] \
   && docker run --name $img \
     -v $PWD/project:/home/red/project \
-    -v $PWD/examples:/home/red/project/examples \
+    -v $examples:/home/red/project/examples \
     -e TERM=xterm-256color -ti -d $img \
-  && cp helpers/* examples/
+  && cp helpers/* $examples/

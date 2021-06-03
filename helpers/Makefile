@@ -1,5 +1,5 @@
 EX=small
-PROJECT=PoreFlow
+PROJECT=project
 PARAMDIR=$(PWD)/$(EX)
 
 SMESH=$(HOME)/$(PROJECT)/bin/poremesh
@@ -59,7 +59,7 @@ $(SFLOWDIR) $(SVTKDIR):
 
 clean :
 	cd $(EX) \
-	&& rm poreflow*.txt *.bin *.log *.tout *.xml *.dat -f
+	&& rm poreflow*.txt *.bin *.log *.tout *.xml *.dat CELLS.txt* -f
 
 clean-geom :
 	rm $(EX)/geom/*.mhd -f
