@@ -3,6 +3,7 @@
 SVTKDIR=$1
 EXAMPLE=$2
 N=$3
+M=$4
 
 RANGE=0
 
@@ -15,7 +16,7 @@ else
   [[ $top -gt 1 ]] && RANGE="1-$top"
 fi
 
-
+[[ -n $M ]] && RANGE=$M
 [[ -f $EXAMPLE/sFlowToVtk.ini ]] || cp $SVTKDIR/../sFlowToVtk.ini $EXAMPLE
 
 grep -q 'parallel[ ]\?=.*' $EXAMPLE/sFlowToVtk.ini \
@@ -25,3 +26,4 @@ grep -q 'parallel[ ]\?=.*' $EXAMPLE/sFlowToVtk.ini \
 grep -q 'unstationary[ ]\?=.*' $EXAMPLE/sFlowToVtk.ini \
   && sed -ri "s;unstationary[ ]?=.*;unstationary = $RANGE;" $EXAMPLE/sFlowToVtk.ini \
   || echo "unstationary = $RANGE" > $EXAMPLE/sFlowToVtk.ini
+

@@ -12,6 +12,7 @@ SVTK=$(SVTKDIR)/sFlowToVTK
 GENOUT=$(shell bash gen-names.sh $(EX))
 N=$(shell echo $(GENOUT) | cut -d ' ' -f1 )
 mesh_parts=$(shell echo $(GENOUT) | cut -d ' ' -f2- )
+VTK_RANGE=
 
 
 
@@ -26,7 +27,7 @@ run: | $(mesh_parts) $(SFLOW)
 	&& mpirun -n $N $(SFLOW) pore.apr pore.ini
 
 vtk: | $(SVTK)
-	@bash prep-vtk.sh $(SVTKDIR) $(EX) $N
+	@bash prep-vtk.sh $(SVTKDIR) $(EX) $N $(VTK_RANGE)
 	@rm -rf $(EX)/VTK
 	@cd $(EX) \
 	&& $(SVTK) sFlowToVtk.ini
@@ -59,10 +60,10 @@ $(SFLOWDIR) $(SVTKDIR):
 
 clean :
 	cd $(EX) \
-	&& rm poreflow*.txt *.bin *.log *.tout *.xml *.dat CELLS.txt* -f
+	&& rm poreflow*.txt *.bin *.log *.tout \
+	*.xml *mon.dat *out.dat CELLS.txt* -f
 
 clean-geom :
-	rm $(EX)/geom/*.mhd -f
 	rm $(EX)/geom/*.out -f
 	rm $(EX)/geom/*madd -f
 	rm $(EX)/geom/*.umesh -f

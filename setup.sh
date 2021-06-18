@@ -2,9 +2,16 @@
 
 [[ "$@" = *=* ]] && { echo '= is invalid sign in arguments'; exit 1; }
 
+
+uid=$(id -u)
+gid=$(id -g)
+
 ncores=4
 examples="$PWD/examples"
-set -- $(getopt -o n:,e: --name "$0" -- "$@")
+eval set -- $(getopt -o e:,i:,n: --name "$0" -- "$@")
+
+([[ $@ =~ '-i' ]] && ! grep -qE '\-i [0-9]{3,},[0-9]{3,}' <<< $@) \
+  && { echo 'Incorrect specification of a <UID,GID> pair'; exit 1; }
 
 
 while [[ $1 != '--' ]]
@@ -12,6 +19,10 @@ do
   case $1 in
     -n) ncores=$2; shift 2 ;;
     -e) examples=$2; shift 2 ;;
+    -i)
+      uid=$(cut -d ',' -f1 <<< $2);
+      gid=$(cut -d ',' -f2 <<< $2);
+      shift 2 ;;
     *) echo Invalid arg; exit 1 ;;
   esac
 done
@@ -19,6 +30,7 @@ shift
 
 [[ $# -gt 1 ]] && { echo More than one positional argument given!; exit 1; }
 [[ -n $1 ]] && img=$1 || img=red
+
 
 find_string () {
   local sel=$1
@@ -38,10 +50,10 @@ find_string $img $containers \
 
 mkdir -p vimmed
 
-docker build --build-arg UID=`id -u` --build-arg GID=`id -g` --build-arg N_CORES=$ncores -t $img . \
-&& wget -O vimmed/Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
-&& docker build --build-arg IMG_NAME=$img -t $img vimmed/ \
-&& rm -rf vimmed || :
+docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncores -t $img . \
+  && wget -O vimmed/Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
+  && docker build --build-arg IMG_NAME=$img -t $img vimmed/ \
+  && rm -rf vimmed || :
 
 [[ $? -ne 0 ]] && { echo Problems with building the images; exit 1; }
 unzip -n PoreFlow*.zip -d project 2> /dev/null \
