@@ -2,4 +2,5 @@
 !amgcl-master.zip
 
 project/*
+examples/*
 !examples/small

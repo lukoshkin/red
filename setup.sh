@@ -8,7 +8,21 @@ gid=$(id -g)
 
 ncores=4
 examples="$PWD/examples"
-eval set -- $(getopt -o e:,i:,n: --name "$0" -- "$@")
+
+
+help_msg () {
+  echo 'Usage: ./setup.sh [opts] [img_name]'
+  echo -e '\nOptions:'
+  printf '  %-16s Mount a folder with examples.\n' '-e'
+  printf "  %-16s Specify user IDs inside the container.\n" '-i'
+  printf '  %-16s Set the number of cores for building the base image.\n' '-n'
+  echo
+}
+
+params=$(getopt -o e:,i:,n: --name "$0" -- "$@")
+[[ $? -ne 0 ]] && { help_msg; exit; }
+eval set -- $params
+unset params
 
 ([[ $@ =~ '-i' ]] && ! grep -qE '\-i [0-9]{3,},[0-9]{3,}' <<< $@) \
   && { echo 'Incorrect specification of a <UID,GID> pair'; exit 1; }
