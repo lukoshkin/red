@@ -55,5 +55,7 @@ make vtk EX=small VTK_RANGE=1-10
 
 Where `VTK_RANGE` specifies what saved states of unstationary calculations
 are to be presented in the visualization data. For the stationary case,
-the last argument is omitted.
+the last argument is always omitted. In the unstationary case, if ignored,
+the maximum possible range is chosen. To plot just the last saved state
+(via CHECK or SAVE), pass `VTK_RANGE=0`. The results will appear in `small/VTK`.
 

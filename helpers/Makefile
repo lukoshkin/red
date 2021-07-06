@@ -35,7 +35,7 @@ vtk: | $(SVTK)
 
 # &: grouped targets (update of multiple targets from one invocation)
 # (that is, only one invocation of rules for any number of modified targets)
-$(mesh_parts) &: $(PARAMDIR)/param.txt
+$(mesh_parts) &:
 	@cd $(EX) \
 	&& $(SMESH) $(PARAMDIR)/param.txt
 
@@ -61,7 +61,7 @@ $(SFLOWDIR) $(SVTKDIR):
 clean :
 	cd $(EX) \
 	&& rm poreflow*.txt *.bin *.log *.tout \
-	*.xml *mon.dat *out.dat CELLS.txt* -f
+	*.xml *{mon,out,residuals}.dat CELLS.txt* -f
 
 clean-geom :
 	rm $(EX)/geom/*.out -f

@@ -73,9 +73,12 @@ docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncor
 unzip -n PoreFlow*.zip -d project 2> /dev/null \
   && chmod +x project/bin/poremesh
 
+echo
 [[ -d project  && -d $examples ]] \
-  && docker run --name $img \
-    -v $PWD/project:/home/red/project \
-    -v $examples:/home/red/project/examples \
-    -e TERM=xterm-256color -ti -d $img \
-  && cp helpers/* $examples/
+  && { docker run --name $img \
+         -v $PWD/project:/home/red/project \
+         -v $examples:/home/red/project/examples \
+         -e TERM=xterm-256color -ti -d $img \
+      && cp helpers/* $examples/ \
+      && echo Successfully launched: $img container; } \
+  || >&2 echo Missing elements in the structure: 'PoreFlow*.zip' or $examples
