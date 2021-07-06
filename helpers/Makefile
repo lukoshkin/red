@@ -58,10 +58,12 @@ $(SFLOWDIR) $(SVTKDIR):
 
 .PHONY: clean clean-geom clean-all
 
+# make uses /bin/sh; thus, grouping with curly brackets is
+# only available after adding, for example, `SHELL=/usr/bin/bash`.
 clean :
 	cd $(EX) \
-	&& rm poreflow*.txt *.bin *.log *.tout \
-	*.xml *{mon,out,residuals}.dat CELLS.txt* -f
+	&& rm -f poreflow*.txt *.bin *.log *.tout \
+	*.xml *mon.dat *out.dat *residuals.dat CELLS.txt*
 
 clean-geom :
 	rm $(EX)/geom/*.out -f
