@@ -5,17 +5,7 @@
 1. ```git clone https://github.com/lukoshkin/red.git```
 1. Download from gdrive the latest version of the SFU code
    to `red` folder.
-1. Run `setup.sh` with required options.  
-
-   * For example, ```./setup.sh -n 8 -i 1042,1507 -e /abs/path/to/examples lapuza```  
-   will result in `uid=1042` and `gid=1507` inside the running container `lapuza` with
-   bind mount that mounts `/abs/path/to/examples` on the host to `/home/red/project/examples`
-   in the container. The option `-n` specifies the number of cores used
-   when building the base image.
-
-   * Defaults for this script have already nice values:  
-   `-n 4`, `-i $(id -u),$(id -g)`, `-e "$PWD/examples"`, container's name - `red`
-
+1. Run `./setup.sh` with required options (see [options for `setup.sh`](#options-for-setupsh)).
 1. Get into the container named `lapuza` with  
    ```docker attach lapuza``` or ```docker exec -ti lapuza bash```
 
@@ -59,3 +49,24 @@ the last argument is always omitted. In the unstationary case, if ignored,
 the maximum possible range is chosen. To plot just the last saved state
 (via CHECK or SAVE), pass `VTK_RANGE=0`. The results will appear in `small/VTK`.
 
+## Options for `setup.sh`
+
+Here are some points that help to gain more control over the script:
+
+   * Running ```./setup.sh -n 8 -i 1042,1507 -e /abs/path/to/examples lapuza```  
+   results in `uid=1042` and `gid=1507` inside the running container `lapuza` with
+   bind mount that mounts `/abs/path/to/examples` on the host to `/home/red/project/examples`
+   in the container. The option `-n` specifies the number of cores used
+   when building the base image.
+
+   * Defaults for this script have already nice values:  
+   `-n 4`, `-i $(id -u),$(id -g)`, `-e "$PWD/examples"`, container's name - `red`
+
+   * SFU code components should be archived in a zip named `PoreFlow*.zip`
+     (without leading directories). Should they be packed in a folder
+     that is later zipped, one must use `--strip-sfu-zip` flag to
+     convert the archive to the required structure.
+
+   * For the code deploiment with singularity, it is better to save a light
+     version of the docker image <br> with `--save-img-base` that further will
+     be converted to a singularity image.

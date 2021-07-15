@@ -22,6 +22,14 @@ utils::find_string () {
 utils::strip_zip_2dir () {
   mkdir $2
   unzip -d $2 $1 2> /dev/null
+
+  if [[ $(ls $2 | wc -w) -gt 1 ]]
+  then
+    rm -rf $2
+    >&2 echo Unexpected zip structure
+    exit 1
+  fi
+
   local dir=$(ls $2)
   mv $2/*/* $2
   rmdir $2/$dir
