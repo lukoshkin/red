@@ -27,7 +27,7 @@ while [[ $1 != '--' ]]
 do
   case $1 in
     -n) ncores=$2; shift 2 ;;
-    -e) examples=$2; shift 2 ;;
+    -e) examples="$2"; shift 2 ;;
     -i)
       uid=$(cut -d ',' -f1 <<< $2);
       gid=$(cut -d ',' -f2 <<< $2);
@@ -53,27 +53,30 @@ utils::find_string $img $containers \
 
 mkdir -p vimmed
 
-docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncores -t $base . \
+docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncores -t $base docker \
   && wget -O vimmed/Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
-  && docker build --build-arg IMG_NAME=$base -t $img vimmed/ \
-  && rm -rf vimmed || :
+  && docker build --build-arg IMG_NAME=$base -t $img vimmed
 
-[[ $? -ne 0 ]] && { echo Problems with building the images; exit 1; }
+build_status=$?
+rm -rf vimmed
+
+[[ $build_status -ne 0 ]] \
+  && { echo Problems with building the images; exit 1; }
 
 if $strip_sfu_zip_flag
 then
   utils::strip_zip_2dir PoreFlow*.zip project
 else
-  unzip -n PoreFlow*.zip -d project 2> /dev/null || echo PoreFlow*.zip not found.
-  chmod +x project/bin/poremesh || echo PoreFlow*.zip has a different structure than expected.
+  unzip -nqqd project PoreFlow*.zip
 fi
 
 echo
-[[ -d project  && -d $examples ]] \
+[[ -d project && -d "$examples" ]] \
+  && chmod +x project/bin/poremesh \
   && { docker run --name ${img%:vimmed} \
-         -v $PWD/project:/home/red/project \
-         -v $examples:/home/red/project/examples \
+         -v "$PWD"/project:/home/red/project \
+         -v "$examples":/home/red/project/examples \
          -e TERM=xterm-256color -ti -d $img \
-      && cp helpers/* $examples/ \
+      && cp helpers/* "$examples"/ \
       && echo Successfully launched: ${img%:vimmed} container; } \
-  || >&2 echo Missing elements in the structure: 'PoreFlow*.zip' or $examples
+  || >&2 echo Missing elements in the structure: 'PoreFlow*.zip' or "$examples"
