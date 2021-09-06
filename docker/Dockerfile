@@ -86,8 +86,8 @@ WORKDIR $HOME
 RUN git clone https://gitlab.com/libeigen/eigen.git \
     && echo "# >>> RESERVED-CONFS >>>" >> .bashrc \
     && echo "export SFLOW_BOOST_DIR=/usr/include/boost" >> .bashrc \
-    && echo "export SFLOW_AMGCL_DIR=~/amgcl-master" >> .bashrc \
-    && echo "export SFLOW_EIGEN_DIR=~/eigen" >> .bashrc \
+    && echo "export SFLOW_AMGCL_DIR=$HOME/amgcl-master" >> .bashrc \
+    && echo "export SFLOW_EIGEN_DIR=$HOME/eigen" >> .bashrc \
     && echo "# <<< RESERVED-CONFS <<<" >> .bashrc
 
 ####

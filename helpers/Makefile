@@ -1,12 +1,12 @@
 EX=small
-PROJECT=project
+PROJECT=$(HOME)/project
 PARAMDIR=$(PWD)/$(EX)
 
-SMESH=$(HOME)/$(PROJECT)/bin/poremesh
-SFLOWDIR=$(HOME)/$(PROJECT)/src/poreflow/build
+SMESH=$(PROJECT)/bin/poremesh
+SFLOWDIR=$(PROJECT)/src/poreflow/build
 SFLOW=$(SFLOWDIR)/sFlow
 
-SVTKDIR=$(HOME)/$(PROJECT)/src/sFlowToVTK/build
+SVTKDIR=$(PROJECT)/src/sFlowToVTK/build
 SVTK=$(SVTKDIR)/sFlowToVTK
 
 GENOUT=$(shell bash gen-names.sh $(EX))
