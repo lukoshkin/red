@@ -1,5 +1,5 @@
 EX=small
-PROJECT=$(HOME)/project
+PROJECT=/home/red/project
 PARAMDIR=$(PWD)/$(EX)
 
 SMESH=$(PROJECT)/bin/poremesh
@@ -11,6 +11,11 @@ SVTK=$(SVTKDIR)/sFlowToVTK
 
 GENOUT=$(shell bash gen-names.sh $(EX))
 N=$(shell echo $(GENOUT) | cut -d ' ' -f1 )
+N_check=$(shell ls $(EX)/geom/*.mesh 2> /dev/null | wc -w)
+ifeq ($(N_check),0)
+	N_check = 1
+endif
+
 mesh_parts=$(shell echo $(GENOUT) | cut -d ' ' -f2- )
 VTK_RANGE=
 
@@ -35,9 +40,13 @@ vtk: | $(SVTK)
 
 # &: grouped targets (update of multiple targets from one invocation)
 # (that is, only one invocation of rules for any number of modified targets)
-$(mesh_parts) &:
-	@cd $(EX) \
-	&& $(SMESH) $(PARAMDIR)/param.txt
+$(mesh_parts) &: $(PARAMDIR)/param.txt
+	if [ $N != $(N_check) ]; \
+	then \
+		make clean-geom \
+		&& cd $(EX) \
+		&& $(SMESH) $(PARAMDIR)/param.txt; \
+	fi
 
 
 $(SFLOW): | $(SFLOWDIR)
