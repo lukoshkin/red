@@ -22,10 +22,7 @@ VTK_RANGE=
 
 
 all: | $(mesh_parts) $(SFLOW)
-	@echo "All compiled!"
-	@echo -e '\n\n'
-	@echo example: $(EX)
-	@echo path to solver exe: $(SFLOW)
+	@echo All is up to date.
 
 run: | $(mesh_parts) $(SFLOW)
 	@cd $(EX) \
@@ -41,7 +38,7 @@ vtk: | $(SVTK)
 # &: grouped targets (update of multiple targets from one invocation)
 # (that is, only one invocation of rules for any number of modified targets)
 $(mesh_parts) &: $(PARAMDIR)/param.txt
-	if [ $N != $(N_check) ]; \
+	@if [ $N != $(N_check) ]; \
 	then \
 		make clean-geom \
 		&& cd $(EX) \
@@ -72,7 +69,7 @@ $(SFLOWDIR) $(SVTKDIR):
 clean :
 	cd $(EX) \
 	&& rm -f poreflow*.txt *.bin *.log *.tout \
-	*.xml *mon.dat *out.dat *residuals.dat CELLS.txt*
+	*.xml *mon*.dat *out.dat *residuals.dat CELLS.txt*
 
 clean-geom :
 	rm $(EX)/geom/*.out -f

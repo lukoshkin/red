@@ -5,20 +5,21 @@
 #SBATCH --mem=50G
 
 example=small
+prefix=/home/red/project
+sflow=$prefix/src/poreflow/build/sFlow
 nproc=$(sed -rn 's;^#SBATCH -n ([0-9]+);\1;p' $0)
-sflow=/home/red/project/src/poreflow/build/sFlow
 
 module load mpi/openmpi-3.1.4
+
 current_time=$(date +%s)
 echo '>>> running the script: started >>>'
 
 
 mpirun -n $nproc singularity exec \
-  --no-home --pwd /home/red \
-  -B "$PWD"/project:/home/red/project \
-  -B "$PWD"/examples:/home/red/project/examples \
-  red.simg /bin/bash -c \
-  "cd project/examples/$example && $sflow pore.apr pore.ini"
+  -B "$PWD/project:$prefix" \
+  -B "$PWD/examples:$prefix/examples" \
+  --no-home --pwd "$prefix/examples/$example" \
+  red.simg $sflow pore.apr pore.ini
 
 
 echo '<<< running the script: finished <<<'
