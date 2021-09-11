@@ -4,7 +4,8 @@ help_msg () {
   echo 'Synopsis:'
   printf '%-4s./simg.make setup\n'
   printf '%-4s./simg.make [-n <nparts>] <example>\n'
-  printf '%-4s./simg.make run [-N <nnodes>][-p <queue>][--mem <nG>] <example>\n'
+  printf '%-4s./simg.make run [-p <queue>][-N <nnodes>]'
+  printf '[--mem <nG>][--time <days-hours>] <example>\n'
   printf '%-4s./simg.make vtk <example> [<vtk-range>]\n'
   printf '%-4s./simg.make clean[-geom|-all] <example>\n'
 }
@@ -21,6 +22,7 @@ setup () {
 exec_cmd () {
   [[ -z $1 || -z $2 ]] && { help_msg; return; }
   [[ -d examples/$2 ]] || { echo "Example doesn't exist."; exit 1; }
+  [[ -f red.simg ]] || { echo "No image 'red.simg' found"; exit 1; }
 
   local cmd
   cmd="source .bashrc && cd project/examples && make"
@@ -52,7 +54,7 @@ make () {
 
 
 run () {
-  params=$(getopt -o p:,N: -l mem: --name "$0" -- "$@")
+  params=$(getopt -o p:,N: -l mem:,time: --name "$0" -- "$@")
   [[ $? -ne 0 ]] && { help_msg; exit 1; }
   eval set -- $params
   unset params
@@ -64,6 +66,7 @@ run () {
       -p) opts["-p "]=$2; shift 2 ;;
       -N) opts['-N ']=$2; shift 2 ;;
       --mem) opts['--mem=']=$2; shift 2 ;;
+      --time) opts['--time=']=$2; shift 2 ;;
       *) echo Invalid option.; exit 1 ;;
     esac
   done
@@ -89,8 +92,13 @@ run () {
 
 
 vtk () {
-  [[ -n $2 ]] && ![[ $2 =~ ^[0-9]+-?[0-9]*$ ]] && echo Invalid vtk range.
-  exec_cmd vtk $1 $2
+  if [[ -n $2 ]]
+  then
+    ! [[ $2 =~ ^[0-9]+-?[0-9]*$ ]] && { echo Invalid vtk range.; exit 1; }
+    vtk_range="VTK_RANGE=$2"
+  fi
+
+  exec_cmd vtk $1 $vtk_range
 }
 
 
@@ -98,7 +106,6 @@ clean () {
   [[ -z $2 ]] && { echo Example required.; exit 1; }
   exec_cmd $@
 }
-
 
 
 main () {

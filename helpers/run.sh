@@ -3,6 +3,7 @@
 #SBATCH -N 1
 #SBATCH -n 4
 #SBATCH --mem=50G
+#SBATCH --time=1-0
 
 example=small
 prefix=/home/red/project
