@@ -29,7 +29,8 @@ vim small/param.txt
 
 When everything is ready for launch, run an example named `small` with
 
-```
+```bash
+make EX=small  # required every time one changes settings
 make run EX=small
 ```
 

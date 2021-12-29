@@ -12,8 +12,11 @@ SVTK=$(SVTKDIR)/sFlowToVTK
 GENOUT=$(shell bash gen-names.sh $(EX))
 N=$(shell echo $(GENOUT) | cut -d ' ' -f1 )
 N_check=$(shell ls $(EX)/geom/*.mesh 2> /dev/null | wc -w)
+
 ifeq ($(N_check),0)
-	N_check = 1
+	ifneq ($(shell ls $(EX)/geom/gcube.out 2> /dev/null),)
+		N_check = 1
+	endif
 endif
 
 mesh_parts=$(shell echo $(GENOUT) | cut -d ' ' -f2- )

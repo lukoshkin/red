@@ -42,7 +42,7 @@ make () {
 
   [[ $1 = '-n' ]] && { npart=$2; shift 3; } || shift
 
-  if [[ -n $npart ]]
+  if [[ -d "examples/$1" && -n $npart ]]
   then
     [[ $npart =~ ^[0-9]+$ ]] || { echo '-n: Invalid value'; exit 1; }
     [[ -z $1 ]] && { echo 'Name of example required'; exit 1; }
