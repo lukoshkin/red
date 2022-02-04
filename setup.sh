@@ -23,8 +23,7 @@ unset params
   && { echo 'Incorrect specification of a <UID,GID> pair'; exit 1; }
 
 
-while [[ $1 != '--' ]]
-do
+while [[ $1 != '--' ]]; do
   case $1 in
     -n) ncores=$2; shift 2 ;;
     -e) examples="$2"; shift 2 ;;
@@ -47,21 +46,26 @@ img+=':vimmed'
 $save_img_base_flag && base=${img/:vimmed/:base} || base=$img
 
 containers=$(docker ps -a --format '{{.Names}}')
-utils::find_string $img $containers \
-  && { echo container \"$img\" already exists; exit 1; }
+utils::find_string ${img%:*} $containers \
+  && { echo Container \"${img%:*}\" already exists.; exit 1; }
 
 
-mkdir -p vimmed
+excode=0
 
-docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncores -t $base docker \
-  && wget -O vimmed/Dockerfile https://raw.githubusercontent.com/lukoshkin/evangelist/master/Dockerfile \
-  && docker build --build-arg IMG_NAME=$base -t $img vimmed
+docker build --build-arg UID=$uid --build-arg GID=$gid --build-arg N_CORES=$ncores -t $base docker
+(( excode+=$? ))
 
-build_status=$?
-rm -rf vimmed
+if ! [[ -d /tmp/evangelist ]]; then
+  git clone https://github.com/lukoshkin/evangelist.git /tmp/evangelist
+  mkdir /tmp/evangelist/custom
+  cp docker/bashrc /tmp/evangelist/custom/custom.bash
+fi
 
-[[ $build_status -ne 0 ]] \
-  && { echo Problems with building the images; exit 1; }
+docker build --build-arg IMG_NAME=$base -t $img /tmp/evangelist
+(( excode+=$? ))
+
+[[ $excode -ne 0 ]] && { echo Problems with building the images; exit 1; }
+
 
 if $strip_sfu_zip_flag
 then
@@ -73,10 +77,10 @@ fi
 echo
 [[ -d project && -d "$examples" ]] \
   && chmod +x project/bin/poremesh \
-  && { docker run --name ${img%:vimmed} \
+  && { docker run --name ${img%:*} \
          -v "$PWD"/project:/home/red/project \
          -v "$examples":/home/red/project/examples \
          -e TERM=xterm-256color -ti -d $img \
       && cp helpers/* "$examples"/ \
-      && echo Successfully launched: ${img%:vimmed} container; } \
+      && echo Successfully launched: ${img%:*} container; } \
   || >&2 echo Missing elements in the structure: 'PoreFlow*.zip' or "$examples"

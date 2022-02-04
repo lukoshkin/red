@@ -12,8 +12,7 @@ utils::find_string () {
   local sel=$1
   shift
 
-  for str in $@
-  do
+  for str in $(echo $@); do
     [[ $str = $sel ]] && return 0
   done
   return 1
@@ -23,8 +22,7 @@ utils::strip_zip_2dir () {
   mkdir -p $2
   unzip -nqqd $2 $1 2> /dev/null
 
-  if [[ $(ls $2 | wc -w) -gt 1 ]]
-  then
+  if [[ $(ls $2 | wc -w) -gt 1 ]]; then
     rm -rf $2  # no safe checks (consciously)
     >&2 echo Unexpected zip structure
     exit 1

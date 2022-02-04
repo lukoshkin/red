@@ -80,15 +80,12 @@ RUN tarball=v${MPI_VERSION%.*}/openmpi-$MPI_VERSION.tar.bz2 \
 #     && ./b2 --with=all -j$N_CORES install
 
 WORKDIR $HOME
+COPY bashrc ./
 ####
 ## Download Eigen & Set up your .bashrc here
 ####
 RUN git clone https://gitlab.com/libeigen/eigen.git \
-    && echo "# >>> RESERVED-CONFS >>>" >> .bashrc \
-    && echo "export SFLOW_BOOST_DIR=/usr/include/boost" >> .bashrc \
-    && echo "export SFLOW_AMGCL_DIR=$HOME/amgcl-master" >> .bashrc \
-    && echo "export SFLOW_EIGEN_DIR=$HOME/eigen" >> .bashrc \
-    && echo "# <<< RESERVED-CONFS <<<" >> .bashrc
+    && cat bashrc >> .bashrc && rm bashrc
 
 ####
 ## Add non-root user to the container

@@ -1,0 +1,3 @@
+export SFLOW_BOOST_DIR=/usr/include/boost
+export SFLOW_AMGCL_DIR=$HOME/amgcl-master
+export SFLOW_EIGEN_DIR=$HOME/eigen
